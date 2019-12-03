@@ -1,0 +1,251 @@
+
+/*---------------Login-------------------*/
+
+body{
+	margin: 0;
+	padding: 0;
+  background-color: #F2F2F2;
+}
+
+#main{
+	width: 100%;
+	height: 100%;
+}
+
+.banner{
+  padding: 0;
+}
+
+.banner img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  position: absolute;
+  opacity: 0;
+  left: 0;
+  z-index: -1;
+}
+
+.banner img.next{
+  opacity: 1;
+  z-index: 1;
+}
+
+.banner img.prev{
+  opacity: 1;
+  z-index: 2;
+}
+
+.banner img.fade-out{
+  opacity: 0;
+  transition: visibility 0s  1s, opacity 1s linear;
+  visibility: hidden;
+}
+
+#form{
+  background: url('../images/company.jpg');
+  background-size: cover;
+  background-position: center;
+}
+
+#logo{
+  width: 120px;
+  height: auto;
+}
+
+#simap-text{
+  font-family: "Roboto", sans-serif;
+  color: #1f3984;
+  font-size: 2em;
+  font-weight: bold;
+  padding-top: 20px;
+}
+
+#login, #password{
+  font-size: 20px;
+  margin: auto;  
+  height: 50px;
+  border-radius: 30px;
+  max-width: 60%;
+}
+
+#btn{
+  background-color: #1f3984;
+  font-size: 20px;
+  margin: auto;  
+  height: 50px;
+  border-radius: 30px;
+  max-width: 60%;
+}
+
+/*--------animasi loading-------------*/
+.loader-wrapper{
+	width: 100%;
+	height: 100%;
+	position: fixed;
+	top: 0;
+	left: 0;
+	background-color: #0e2b80;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	z-index: 999;
+}
+
+.loader {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  position: relative;
+  border: 4px solid #Fff;
+  animation: loader 2s infinite ease;
+}
+
+.loader-inner {
+  vertical-align: top;
+  display: inline-block;
+  width: 100%;
+  background-color: #fff;
+  animation: loader-inner 2s infinite ease-in;
+}
+
+@keyframes loader {
+  0% {
+    transform: rotate(0deg);
+  }
+  
+  25% {
+    transform: rotate(180deg);
+  }
+  
+  50% {
+    transform: rotate(180deg);
+  }
+  
+  75% {
+    transform: rotate(360deg);
+  }
+  
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes loader-inner {
+  0% {
+    height: 0%;
+  }
+  
+  25% {
+    height: 0%;
+  }
+  
+  50% {
+    height: 100%;
+  }
+  
+  75% {
+    height: 100%;
+  }
+  
+  100% {
+    height: 0%;
+  }
+}
+
+/*----------------navbar-----------------*/
+.navbar{
+  width: 100%;
+  height: auto;
+  position: fixed;
+  top: 0;
+	background-color: #0813B1;
+	z-index: 2;
+}
+
+.brand img{
+	width: 60px;
+	height: auto;
+}
+
+#title{
+	font-family: 'Roboto';
+	font-weight: bold;
+	font-size: 2em;
+	color: white;
+	text-align: center;
+	line-height: 60px;
+	padding-left: 15px;
+}
+
+.logout-btn{
+	font-style: italic;
+	margin-left: 10px;
+	text-decoration: none;
+	color: white;
+}
+
+/*---------------sidebar-------------------*/
+#sidebar-wrapper{
+  height: 100%; 
+  width: 13rem; 
+  position: fixed; 
+  z-index: 1; 
+  top: 0; 
+  left: 0;
+  background-color: #0A36B5;
+  color: white;
+  overflow-x: hidden;
+  padding-top: 55px;
+}
+
+
+.line{
+	border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+.borderless{
+	border: 0 none !important;
+	background-color: #0A36B5;
+	color: white;	
+	font-size: 1.2em;
+}
+
+.list-group-item:hover{
+  	background-color: #1C48C5;
+	color: white;
+}
+
+.list-group-item-action:focus{
+	background-color: #194DE4;
+	color: white;
+}
+
+.list-group-item.active {
+  	background-color: #194DE4;
+	color: white;
+}
+
+.avatar{
+	vertical-align: middle;
+	width: 60px;
+	height: 60px;
+	border-radius: 50%;
+}
+
+.profile-name{
+	font-size: 1em;
+}
+
+/*--------------content-----------------*/
+
+#page-content-wrapper{
+  width: 100%;
+  margin-top: 60px;
+  margin-left: 13em;
+}
+
+.table{
+  font-size: 0.8em;
+}
