@@ -23,6 +23,20 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        if (auth()->user()->role == 'superdmin') {
+            return redirect()->route('superadmin.index');
+        }
+        elseif (auth()->user()->role == 'admin') {
+            return redirect()->route('admin.index');
+        }
+        elseif (auth()->user()->role == 'guru') {
+            return redirect()->route('guru.index');
+        }else{
+            return view('home');
+        }
+    }
+
+    public function landingPage(){
+        return view('auth.login');
     }
 }

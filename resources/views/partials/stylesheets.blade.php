@@ -1,3 +1,6 @@
 <!-- Theme core -->
-  <link href="{{ asset('assets/css/core/bootstrap.min.css') }}" rel="stylesheet">
-  <link href="{{ asset('assets/css/core/animate.min.css') }}" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap.min.css') }}">
+  <link rel="stylesheet" type="text/css" href="{{ asset('css/custom.css') }}">
+  <link rel="stylesheet" type="text/css" href="{{ asset('fontawesome/css/fontawesome.css')}}">
+	<link rel="stylesheet" type="text/css" href="{{ asset('DataTables/datatables.min.css')}}">
+  <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">

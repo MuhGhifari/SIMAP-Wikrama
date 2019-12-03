@@ -20,6 +20,22 @@ class LoginController extends Controller
 
     use AuthenticatesUsers;
 
+    protected function authenticated(){
+        if (auth()->user()->role == 'superadmin') {
+            return redirect()->route('superadmin.index');
+        }
+        elseif (auth()->user()->role == 'admin') {
+            return redirect()->route('admin.index');
+        }
+        elseif (auth()->user()->role == 'guru') {
+            return redirect()->route('guru.index');
+        }
+        else{
+            return redirect()->route('home');
+        }
+    }
+
+
     /**
      * Where to redirect users after login.
      *
