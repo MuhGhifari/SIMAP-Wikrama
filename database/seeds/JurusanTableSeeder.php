@@ -31,13 +31,14 @@ class JurusanTableSeeder extends Seeder
     		'HTL',
     		'TBG'
     	];
-
+        $kaprog_id = 1;
         for ($i=0; $i < count($nama); $i++) { 
         	Jurusan::create([
-        		'kaprog_id' => 1,
+        		'kaprog_id' => $kaprog_id,
         		'nama' => $nama[$i],
         		'kode' => $kode[$i]
         	]);
+            $kaprog_id++;
         }
     }
 }

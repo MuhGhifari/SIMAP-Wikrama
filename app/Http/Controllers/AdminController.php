@@ -9,6 +9,10 @@ use App\Rayon;
 use App\Rombel;
 use App\Jurusan;
 use App\DataSiswa;
+use App\DataRombel;
+use App\DataJurusan;
+use App\DataRayon;
+use App\Guru;
 use DataTables;
 use DB;
 use Validator;
@@ -25,6 +29,8 @@ class AdminController extends Controller
 		return view('admin.index');
 	}
 
+//======================== CRUD Siswa =================================
+
 	public function showSiswa(Request $request){
 		$siswa = Siswa::orderBy('nama', 'asc');
 		$data_siswa = DataSiswa::orderBy('nama', 'asc');
@@ -32,7 +38,7 @@ class AdminController extends Controller
 		$rayon = Rayon::all();
 		if ($request->ajax()) {
 			$data = DataSiswa::all();
-			return Datatables::of($data)
+			return DataTables::of($data)
 				->addIndexColumn()
 				->addColumn('action', function ($row) {
 
@@ -98,23 +104,173 @@ class AdminController extends Controller
 		return response()->json($siswa);
 	}
 
+
+//======================== Rapot Siswa =================================
+
 	public function showRapot(){
-		return view('admin.rapot');
+		return view('admin.rapot.index');
 	}
 
-	public function showGuru(){
-		return view('admin.guru');
+
+//======================== CRUD Guru =================================
+
+
+	public function showGuru(Request $request){
+		if ($request->ajax()) {
+			$guru = Guru::all();
+			return DataTables::of($guru)
+			->addIndexColumn()
+				->addColumn('action', function ($row) {
+
+					$btn = '<a href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $row->id . '" data-original-title="Show" class="btn btn-primary btn-sm showData"><i class="fa fa-eye"></i></a>';
+
+					$btn = $btn . ' <a href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $row->id . '" data-original-title="Edit" class="btn btn-warning btn-sm editData" style="color:white;"><i class="fa fa-pencil-alt"></i></a>';
+
+					$btn = $btn . ' <a href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $row->id . '" data-original-title="Delete" class="btn btn-danger btn-sm deleteData"><i class="fa fa-trash"></i></a>';
+
+					return $btn;
+				})
+				->rawColumns(['action'])
+				->make(true);
+		}
+		return view('admin.guru.index', compact('guru'));
 	}
 
-	public function showRayon(){
-		return view('admin.rayon');
+	public function storeGuru(Request $request){
+		Guru::updateOrCreate(['id' => $request->guru_id],
+		[
+			'nik' => $request->nik,
+			'nama' => $request->nama,
+			'jk' => $request->jk,
+			'telp' => $request->telp,
+			'alamat' => $request->alamat,
+		]);
+		return response()->json(['success', 'Data berhasil disimpan.']);
 	}
 
-	public function showRombel(){
-		return view('admin.rombel');
+	public function editGuru($id){
+		$guru = Guru::find($id);
+		return response()->json($guru);
 	}
 
-	public function showJurusan(){
-		return view('admin.jurusan');
+	public function destroyGuru($id){
+		Guru::find($id)->delete();
+		return response()->json(['success', 'Data berhasil dihapus.']);
+	}
+
+	public function showDataGuru($id){
+		$guru = Guru::find($id);
+		return response()->json($guru);
+	}
+
+
+//======================== CRUD Kelas =================================
+
+	public function showKelas(Request $request){
+		return view('admin.kelas.index');
+	}
+
+
+	// CRUD Rombel
+
+	public function showRombel(Request $request){
+		if ($request->ajax()) {
+			$rombel = DataRombel::all();
+			return DataTables::of($rombel)
+			->addIndexColumn()
+				->addColumn('action', function ($row) {
+
+					$btn =' <a href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $row->id . '" data-original-title="Edit" class="btn btn-warning btn-sm editData" style="color:white;"><i class="fa fa-pencil-alt"></i></a>';
+
+					$btn = $btn . ' <a href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $row->id . '" data-original-title="Delete" class="btn btn-danger btn-sm deleteData"><i class="fa fa-trash"></i></a>';
+
+					return $btn;
+				})
+				->rawColumns(['action'])
+				->make(true);
+		}
+	}
+
+	public function storeRombel(Request $request){
+
+	}
+
+	public function editRombel($id){
+		$rombel = Rombel::find($id);
+		return response()->json();
+	}
+
+	public function destroyRombel($id){
+		Rombel::find($id)->delete();
+		return response()->json($rombel);
+	}
+
+
+	// CRUD Jurusan
+	
+	public function showJurusan(Request $request){
+		if ($request->ajax()) {
+			$rombel = DataJurusan::all();
+			return DataTables::of($rombel)
+			->addIndexColumn()
+				->addColumn('action', function ($row) {
+
+					$btn =' <a href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $row->id . '" data-original-title="Edit" class="btn btn-warning btn-sm editData" style="color:white;"><i class="fa fa-pencil-alt"></i></a>';
+
+					$btn = $btn . ' <a href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $row->id . '" data-original-title="Delete" class="btn btn-danger btn-sm deleteData"><i class="fa fa-trash"></i></a>';
+
+					return $btn;
+				})
+				->rawColumns(['action'])
+				->make(true);
+		}
+	}
+
+	public function storeJurusan(Request $request){
+
+	}
+
+	public function editJurusan($id){
+		$jurusan = Jurusan::find($id);
+		return response()->json($jurusan);
+	}
+
+	public function destroyJurusan($id){
+		Jurusan::find($id)->delete();
+		return response()->json();
+	}
+
+
+	// CRUD Rayon
+	
+	public function showRayon(Request $request){
+		if ($request->ajax()) {
+			$rombel = DataRombel::all();
+			return DataTables::of($rombel)
+			->addIndexColumn()
+				->addColumn('action', function ($row) {
+
+					$btn =' <a href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $row->id . '" data-original-title="Edit" class="btn btn-warning btn-sm editData" style="color:white;"><i class="fa fa-pencil-alt"></i></a>';
+
+					$btn = $btn . ' <a href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $row->id . '" data-original-title="Delete" class="btn btn-danger btn-sm deleteData"><i class="fa fa-trash"></i></a>';
+
+					return $btn;
+				})
+				->rawColumns(['action'])
+				->make(true);
+		}
+	}
+
+	public function storeRayon(Request $request){
+
+	}
+
+	public function editRayon($id){
+		$rayon = Rayon::find($id);
+		return response()->json($rayon);
+	}
+
+	public function destroyRayon($id){
+		
 	}
 }
