@@ -33,9 +33,17 @@
           class="borderless list-group-item {{ Request::routeIs('admin.guru') ? 'active' : '' }}">
           <i class="fas fa-fw fa-chalkboard-teacher mr-3"></i> Data Guru
         </a>
-        <a href="{{ route('admin.kelas') }}" 
-          class="borderless list-group-item {{ Request::routeIs('admin.kelas') ? 'active' : '' }}">
-          <i class="fas fa-fw fa-book-reader mr-3"></i> Kelas
+        <a href="{{ route('admin.rombel') }}" 
+          class="borderless list-group-item {{ Request::routeIs('admin.rombel') ? 'active' : '' }}">
+          <i class="fas fa-fw fa-book-reader mr-3"></i> Rombel
+        </a>
+        <a href="{{ route('admin.jurusan') }}" 
+          class="borderless list-group-item {{ Request::routeIs('admin.jurusan') ? 'active' : '' }}">
+          <i class="fas fa-fw fa-book-reader mr-3"></i> Jurusan
+        </a>
+        <a href="{{ route('admin.rayon') }}" 
+          class="borderless list-group-item {{ Request::routeIs('admin.rayon') ? 'active' : '' }}">
+          <i class="fas fa-fw fa-book-reader mr-3"></i> Rayon
         </a>
       </div>
     </div>

@@ -66,21 +66,21 @@ Route::prefix('/admin')->name('admin.')->middleware('admin')->group(function(){
 	Route::get('/kelas', 'AdminController@showKelas')->name('kelas');
 		
 		//  CRUD Rombel
-		Route::get('/kelas/rombel', 'AdminController@showRombel')->name('kelas.rombel');
-		Route::post('/kelas/rombel/simpan', 'AdminController@storeRombel')->name('kelas.rombel.store');
-		Route::get('/kelas/rombel/{id}/edit', 'AdminController@editRombel')->name('kelas.rombel.edit');
-		Route::delete('/kelas/rombel/{id}/hapus', 'AdminController@destroyRombel')->name('kelas.rombel.edit');
+		Route::get('/rombel', 'AdminController@showRombel')->name('.rombel');
+		Route::post('/rombel/simpan', 'AdminController@storeRombel')->name('.rombel.store');
+		Route::get('/rombel/{id}/edit', 'AdminController@editRombel')->name('.rombel.edit');
+		Route::delete('/rombel/{id}/hapus', 'AdminController@destroyRombel')->name('.rombel.edit');
 
 		//  CRUD Jurusan
-		Route::get('/kelas/jurusan', 'AdminController@showJurusan')->name('kelas.jurusan');
-		Route::post('/kelas/jurusan/simpan', 'AdminController@storeJurusan')->name('kelas.jurusan.store');
-		Route::get('/kelas/jurusan/{id}/edit', 'AdminController@editJurusan')->name('kelas.jurusan.edit');
-		Route::delete('/kelas/jurusan/{id}/hapus', 'AdminController@destroyJurusan')->name('kelas.jurusan.edit');
+		Route::get('/jurusan', 'AdminController@showJurusan')->name('.jurusan');
+		Route::post('/jurusan/simpan', 'AdminController@storeJurusan')->name('.jurusan.store');
+		Route::get('/jurusan/{id}/edit', 'AdminController@editJurusan')->name('.jurusan.edit');
+		Route::delete('/jurusan/{id}/hapus', 'AdminController@destroyJurusan')->name('.jurusan.edit');
 
 		//  CRUD Rayon
-		Route::get('/kelas/rayon', 'AdminController@showRayon')->name('kelas.rayon');
-		Route::post('/kelas/rayon/simpan', 'AdminController@storeRayon')->name('kelas.rayon.store');
-		Route::get('/kelas/rayon/{id}/edit', 'AdminController@editRayon')->name('kelas.rayon.edit');
-		Route::delete('/kelas/rayon/{id}/hapus', 'AdminController@destroyRayon')->name('kelas.rayon.edit');
+		Route::get('/rayon', 'AdminController@showRayon')->name('.rayon');
+		Route::post('/rayon/simpan', 'AdminController@storeRayon')->name('.rayon.store');
+		Route::get('/rayon/{id}/edit', 'AdminController@editRayon')->name('.rayon.edit');
+		Route::delete('/rayon/{id}/hapus', 'AdminController@destroyRayon')->name('.rayon.edit');
 
 });
