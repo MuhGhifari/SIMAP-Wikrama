@@ -1,16 +1,5 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
 Route::get('/', function () {
   return redirect()->route('login');
 });
@@ -62,25 +51,23 @@ Route::prefix('/admin')->name('admin.')->middleware('admin')->group(function(){
 		Route::delete('/data-guru/{id}/hapus', 'AdminController@destroyGuru')->name('guru.delete');
 		Route::get('/data-guru/{id}/show', 'AdminController@showDataGuru')->name('guru.show');
 
-	// Halaman Kelas
-	Route::get('/kelas', 'AdminController@showKelas')->name('kelas');
 		
-		//  CRUD Rombel
-		Route::get('/rombel', 'AdminController@showRombel')->name('.rombel');
-		Route::post('/rombel/simpan', 'AdminController@storeRombel')->name('.rombel.store');
-		Route::get('/rombel/{id}/edit', 'AdminController@editRombel')->name('.rombel.edit');
-		Route::delete('/rombel/{id}/hapus', 'AdminController@destroyRombel')->name('.rombel.edit');
+	//  CRUD Rombel
+	Route::get('/rombel', 'AdminController@showRombel')->name('rombel');
+	Route::post('/rombel/simpan', 'AdminController@storeRombel')->name('rombel.store');
+	Route::get('/rombel/{id}/edit', 'AdminController@editRombel')->name('rombel.edit');
+	Route::delete('/rombel/{id}/hapus', 'AdminController@destroyRombel')->name('rombel.edit');
 
-		//  CRUD Jurusan
-		Route::get('/jurusan', 'AdminController@showJurusan')->name('.jurusan');
-		Route::post('/jurusan/simpan', 'AdminController@storeJurusan')->name('.jurusan.store');
-		Route::get('/jurusan/{id}/edit', 'AdminController@editJurusan')->name('.jurusan.edit');
-		Route::delete('/jurusan/{id}/hapus', 'AdminController@destroyJurusan')->name('.jurusan.edit');
+	//  CRUD Jurusan
+	Route::get('/jurusan', 'AdminController@showJurusan')->name('jurusan');
+	Route::post('/jurusan/simpan', 'AdminController@storeJurusan')->name('jurusan.store');
+	Route::get('/jurusan/{id}/edit', 'AdminController@editJurusan')->name('jurusan.edit');
+	Route::delete('/jurusan/{id}/hapus', 'AdminController@destroyJurusan')->name('jurusan.edit');
 
-		//  CRUD Rayon
-		Route::get('/rayon', 'AdminController@showRayon')->name('.rayon');
-		Route::post('/rayon/simpan', 'AdminController@storeRayon')->name('.rayon.store');
-		Route::get('/rayon/{id}/edit', 'AdminController@editRayon')->name('.rayon.edit');
-		Route::delete('/rayon/{id}/hapus', 'AdminController@destroyRayon')->name('.rayon.edit');
+	//  CRUD Rayon
+	Route::get('/rayon', 'AdminController@showRayon')->name('rayon');
+	Route::post('/rayon/simpan', 'AdminController@storeRayon')->name('rayon.store');
+	Route::get('/rayon/{id}/edit', 'AdminController@editRayon')->name('rayon.edit');
+	Route::delete('/rayon/{id}/hapus', 'AdminController@destroyRayon')->name('rayon.edit');
 
 });

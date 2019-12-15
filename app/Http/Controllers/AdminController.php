@@ -189,6 +189,7 @@ class AdminController extends Controller
 				->rawColumns(['action'])
 				->make(true);
 		}
+		return view('admin.rombel.index');
 	}
 
 	public function storeRombel(Request $request){
@@ -224,6 +225,7 @@ class AdminController extends Controller
 				->rawColumns(['action'])
 				->make(true);
 		}
+		return view('admin.jurusan.index');
 	}
 
 	public function storeJurusan(Request $request){
@@ -259,6 +261,7 @@ class AdminController extends Controller
 				->rawColumns(['action'])
 				->make(true);
 		}
+		return view('admin.rayon.index');
 	}
 
 	public function storeRayon(Request $request){

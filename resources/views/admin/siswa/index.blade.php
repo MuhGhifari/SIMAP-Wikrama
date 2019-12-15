@@ -316,34 +316,53 @@
 		$('#ajaxModel').modal('show');
 	});
 
-
 	$('body').on('click', '.editData', function () {
-	var data_id = $(this).data('id');
-	$.get("{{ route('admin.siswa') }}" +'/' + data_id +'/edit', function (data) {
-		$('#modelHeading').html("Edit Data Siswa");
-		$('#saveBtn').val("edit-siswa");
-		$('#ajaxModel').modal('show');
-		$('#siswa_id').val(data.id);
-		$('#nisn').val(data.nisn);
-		$('#nis').val(data.nis);
-		$('#nama').val(data.nama);
-		$('#rayon').val(data.rayon_id);
-		$('#rombel').val(data.rombel_id);
-		$('#alamat').val(data.alamat);
-		$('#jk').val(data.jk);
-		$('#telp').val(data.telp);
-		$('#agama').val(data.agama);
-		$('#tempat_lahir').val(data.tempat_lahir);
-		$('#tanggal_lahir').val(data.tanggal_lahir);
-		$('#asal_sekolah').val(data.asal_sekolah);
-	})
-	 });
+		var data_id = $(this).data('id');
+		$.get("{{ route('admin.siswa') }}" +'/' + data_id +'/edit', function (data) {
+			$('#modelHeading').html("Edit Data Siswa");
+			$('#saveBtn').val("edit-siswa");
+			$('#ajaxModel').modal('show');
+			$('#siswa_id').val(data.id);
+			$('#nisn').val(data.nisn);
+			$('#nis').val(data.nis);
+			$('#nama').val(data.nama);
+			$('#rayon').val(data.rayon_id);
+			$('#rombel').val(data.rombel_id);
+			$('#alamat').val(data.alamat);
+			$('#jk').val(data.jk);
+			$('#telp').val(data.telp);
+			$('#agama').val(data.agama);
+			$('#tempat_lahir').val(data.tempat_lahir);
+			$('#tanggal_lahir').val(data.tanggal_lahir);
+			$('#asal_sekolah').val(data.asal_sekolah);
+		})
+	});
+
+	function nullChecker(){
+		var siswa_id = document.getElementById('siswa_id').siswa_id.value;
+		var nisn = document.getElementById('nisn').nisn.value;
+		var nis = document.getElementById('nis').nis.value;
+		var nama = document.getElementById('nama').nama.value;
+		var rayon = document.getElementById('rayon').rayon.value;
+		var rombel = document.getElementById('rombel').rombel.value;
+		var alamat = document.getElementById('alamat').alamat.value;
+		var jk = document.getElementById('jk').jk.value;
+		var telp = document.getElementById('telp').telp.value;
+		var agama = document.getElementById('agama').agama.value;
+		var tempat_lahir = document.getElementById('tempat_lahir').tempat_lahir.value;
+		var tanggal_lahir = document.getElementById('tanggal_lahir').tanggal_lahir.value;
+		var asal_sekolah = document.getElementById('asal_sekolah').asal_sekolah.value;
+		if (siswa_id = nisn = nis = nama = rayon = rombel = alamat = jk = telp = agama = tempat_lahir = tanggal_lahir = asal_sekolah = "") {
+			alert('Ada data yang kosong!');
+			return false;
+		}
+	}
 
 	$('#saveBtn').click(function (e) {
 		e.preventDefault();
 		$(this).html('Sending..');
 		var form = $('#formSiswa').serialize();
-		console.log(form);
+		nullChecker();
 		$.ajax({
 		  data: $('#formSiswa').serialize(),
 		  url: "{{ route('admin.siswa.store') }}",
@@ -357,7 +376,7 @@
 			  alert('Data berhasil disimpan');
 		  },
 		  error: function (data) {
-			  alert('Error:');
+			  alert('Data yang anda masukkan sudah ada atau tidak lengkap');
 			  $('#saveBtn').html('Save Changes');
 		  }
 	  });
