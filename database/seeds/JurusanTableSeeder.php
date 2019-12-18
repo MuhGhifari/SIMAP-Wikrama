@@ -31,10 +31,10 @@ class JurusanTableSeeder extends Seeder
     		'HTL',
     		'TBG'
     	];
-
+        $dummy = Faker\Factory::create();
         for ($i=0; $i < count($nama); $i++) { 
         	Jurusan::create([
-        		'kaprog_id' => 1,
+        		'kaprog_id' => $dummy->unique()->numberBetween(1, 30),
         		'nama' => $nama[$i],
         		'kode' => $kode[$i]
         	]);

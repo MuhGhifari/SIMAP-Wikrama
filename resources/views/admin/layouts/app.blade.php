@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>SIMAP Guru - @yield('title')</title>
+	<title>SIMAP | Admin - @yield('title')</title>
   <meta name="csrf-token" content="{{ csrf_token() }}">
 	@include('partials.stylesheets')
   @yield('stylesheets')
@@ -33,17 +33,17 @@
           class="borderless list-group-item {{ Request::routeIs('admin.guru') ? 'active' : '' }}">
           <i class="fas fa-fw fa-chalkboard-teacher mr-3"></i> Data Guru
         </a>
-        <a href="{{ route('admin.rayon') }}" 
-          class="borderless list-group-item {{ Request::routeIs('admin.rayon') ? 'active' : '' }}">
-          <i class="fas fa-fw fa-map-marked-alt mr-3"></i> Rayon
-        </a>
         <a href="{{ route('admin.rombel') }}" 
           class="borderless list-group-item {{ Request::routeIs('admin.rombel') ? 'active' : '' }}">
-          <i class="fas fa-fw fa-school mr-3"></i> Rombel
+          <i class="fas fa-fw fa-book-reader mr-3"></i> Rombel
         </a>
         <a href="{{ route('admin.jurusan') }}" 
           class="borderless list-group-item {{ Request::routeIs('admin.jurusan') ? 'active' : '' }}">
           <i class="fas fa-fw fa-book-reader mr-3"></i> Jurusan
+        </a>
+        <a href="{{ route('admin.rayon') }}" 
+          class="borderless list-group-item {{ Request::routeIs('admin.rayon') ? 'active' : '' }}">
+          <i class="fas fa-fw fa-book-reader mr-3"></i> Rayon
         </a>
       </div>
     </div>

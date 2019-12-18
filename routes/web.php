@@ -1,16 +1,5 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
 Route::get('/', function () {
   return redirect()->route('login');
 });
@@ -27,6 +16,7 @@ Auth::routes([
 	'verify' => false
 ]);
 
+
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::prefix('/superadmin')->name('superadmin.')->middleware('superadmin')->group(function(){
@@ -38,16 +28,50 @@ Route::prefix('/guru')->name('guru.')->middleware('guru')->group(function(){
 	Route::get('/beranda', 'GuruController@index')->name('index');
 });
 
+// Middleware Admin
 Route::prefix('/admin')->name('admin.')->middleware('admin')->group(function(){
+	
+	// Halaman Dashboard
 	Route::get('/beranda', 'AdminController@showIndex')->name('index');
+	
+	// CRUD Siswa
 	Route::get('/data-siswa', 'AdminController@showSiswa')->name('siswa');
-	Route::post('/data-siswa/simpan', 'AdminController@storeSiswa')->name('siswa.store');
-	Route::get('/data-siswa/{id}/edit', 'AdminController@editSiswa')->name('siswa.edit');
-	Route::delete('/data-siswa/{id}/delete', 'AdminController@destroySiswa')->name('siswa.delete');
-	Route::get('/data-siswa/{id}/show', 'AdminController@showDataSiswa')->name('siswa.show');
-	Route::get('/rapot', 'AdminController@showRapot')->name('rapot');
+		Route::post('/data-siswa/simpan', 'AdminController@storeSiswa')->name('siswa.store');
+		Route::get('/data-siswa/{id}/edit', 'AdminController@editSiswa')->name('siswa.edit');
+		Route::delete('/data-siswa/{id}/hapus', 'AdminController@destroySiswa')->name('siswa.delete');
+		Route::get('/data-siswa/{id}/show', 'AdminController@showDataSiswa')->name('siswa.show');
+
+	// Halaman Rapot
+	Route::get('/rapot-siswa', 'AdminController@showRapot')->name('rapot');
+	
+	// CRUD Guru
 	Route::get('/data-guru', 'AdminController@showGuru')->name('guru');
-	Route::get('/rayon', 'AdminController@showRayon')->name('rayon');
+		Route::post('/data-guru/simpan', 'AdminController@storeGuru')->name('guru.store');
+		Route::get('/data-guru/{id}/edit', 'AdminController@editGuru')->name('guru.edit');
+		Route::delete('/data-guru/{id}/hapus', 'AdminController@destroyGuru')->name('guru.delete');
+		Route::get('/data-guru/{id}/show', 'AdminController@showDataGuru')->name('guru.show');
+
+		
+	//  CRUD Rombel
 	Route::get('/rombel', 'AdminController@showRombel')->name('rombel');
+	Route::post('/rombel/simpan', 'AdminController@storeRombel')->name('rombel.store');
+	Route::get('/rombel/{id}/edit', 'AdminController@editRombel')->name('rombel.edit');
+	Route::delete('/rombel/{id}/hapus', 'AdminController@destroyRombel')->name('rombel.edit');
+
+	//  CRUD Jurusan
 	Route::get('/jurusan', 'AdminController@showJurusan')->name('jurusan');
+	Route::get('/jurusan/calon', 'AdminController@calonKaprog')->name('jurusan.calon');
+	Route::get('/jurusan/{id}/kaprog', 'AdminController@editKaprog')->name('jurusan.edit.kaprog');
+	Route::post('/jurusan/simpan', 'AdminController@storeJurusan')->name('jurusan.store');
+	Route::get('/jurusan/{id}/edit', 'AdminController@editJurusan')->name('jurusan.edit');
+	Route::delete('/jurusan/{id}/hapus', 'AdminController@destroyJurusan')->name('jurusan.edit');
+
+	//  CRUD Rayon
+	Route::get('/rayon', 'AdminController@showRayon')->name('rayon');
+	Route::get('/rayon/calon', 'AdminController@calonPembimbing')->name('rayon.calon');
+	Route::get('/rayon/{id}/pembimbing', 'AdminController@editPembimbing')->name('rayon.edit.pembimbing');
+	Route::post('/rayon/simpan', 'AdminController@storeRayon')->name('rayon.store');
+	Route::get('/rayon/{id}/edit', 'AdminController@editRayon')->name('rayon.edit');
+	Route::delete('/rayon/{id}/hapus', 'AdminController@destroyRayon')->name('rayon.edit');
+
 });
