@@ -19,8 +19,8 @@ class SiswaTableSeeder extends Seeder
 			'1190'
 	   ];
 	   $jk = [
-			'L',
-			'P',
+			'Laki-laki',
+			'Perempuan',
 	   ];
 	   $agama = [
 			'Katolik',
@@ -30,7 +30,7 @@ class SiswaTableSeeder extends Seeder
 			'Buddha',
 	   ];
 
-	  for ($i=0; $i < 50; $i++) { 
+	  for ($i=0; $i < 100; $i++) { 
 	  	$date = $dummy->dateTimeBetween($startDate = '-20 years', $endDate = '-15 years');
 		Siswa::create([
 			'nisn' => $dummy->unique()->randomNumber($nbDigits = 8),
