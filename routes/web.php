@@ -60,12 +60,16 @@ Route::prefix('/admin')->name('admin.')->middleware('admin')->group(function(){
 
 	//  CRUD Jurusan
 	Route::get('/jurusan', 'AdminController@showJurusan')->name('jurusan');
+	Route::get('/jurusan/calon', 'AdminController@calonKaprog')->name('jurusan.calon');
+	Route::get('/jurusan/{id}/kaprog', 'AdminController@editKaprog')->name('jurusan.edit.kaprog');
 	Route::post('/jurusan/simpan', 'AdminController@storeJurusan')->name('jurusan.store');
 	Route::get('/jurusan/{id}/edit', 'AdminController@editJurusan')->name('jurusan.edit');
 	Route::delete('/jurusan/{id}/hapus', 'AdminController@destroyJurusan')->name('jurusan.edit');
 
 	//  CRUD Rayon
 	Route::get('/rayon', 'AdminController@showRayon')->name('rayon');
+	Route::get('/rayon/calon', 'AdminController@calonPembimbing')->name('rayon.calon');
+	Route::get('/rayon/{id}/pembimbing', 'AdminController@editPembimbing')->name('rayon.edit.pembimbing');
 	Route::post('/rayon/simpan', 'AdminController@storeRayon')->name('rayon.store');
 	Route::get('/rayon/{id}/edit', 'AdminController@editRayon')->name('rayon.edit');
 	Route::delete('/rayon/{id}/hapus', 'AdminController@destroyRayon')->name('rayon.edit');

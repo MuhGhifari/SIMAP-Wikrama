@@ -29,7 +29,7 @@ class AdminController extends Controller
 		return view('admin.index');
 	}
 
-//======================== CRUD Siswa =================================
+//======================= CRUD Siswa =================================
 
 	public function showSiswa(Request $request){
 		$siswa = Siswa::orderBy('nama', 'asc');
@@ -105,7 +105,7 @@ class AdminController extends Controller
 	}
 
 
-//======================== Rapot Siswa =================================
+//====================== Rapot Siswa =================================
 
 	public function showRapot(){
 		return view('admin.rapot.index');
@@ -116,8 +116,8 @@ class AdminController extends Controller
 
 
 	public function showGuru(Request $request){
+		$guru = Guru::all();
 		if ($request->ajax()) {
-			$guru = Guru::all();
 			return DataTables::of($guru)
 			->addIndexColumn()
 				->addColumn('action', function ($row) {
@@ -133,7 +133,7 @@ class AdminController extends Controller
 				->rawColumns(['action'])
 				->make(true);
 		}
-		return view('admin.guru.index', compact('guru'));
+		return view('admin.guru.index', compact('guru', 'calon'));
 	}
 
 	public function storeGuru(Request $request){
@@ -163,17 +163,10 @@ class AdminController extends Controller
 		return response()->json($guru);
 	}
 
-
-//======================== CRUD Kelas =================================
-
-	public function showKelas(Request $request){
-		return view('admin.kelas.index');
-	}
-
-
-	// CRUD Rombel
+//======================= CRUD Rombel ===============================
 
 	public function showRombel(Request $request){
+		$jurusan = Jurusan::all();
 		if ($request->ajax()) {
 			$rombel = DataRombel::all();
 			return DataTables::of($rombel)
@@ -189,30 +182,54 @@ class AdminController extends Controller
 				->rawColumns(['action'])
 				->make(true);
 		}
-		return view('admin.rombel.index');
+		return view('admin.rombel.index', compact('jurusan'));
 	}
 
 	public function storeRombel(Request $request){
-
+		Rombel::updateOrCreate(['id' => $request->rombel_id],
+		[
+			'nama' => $request->rombel,
+			'jurusan_id' => $request->jurusan,
+			'tingkatan' => $request->tingkatan,
+			'tahun_ajaran' => $request->tahun_ajaran,
+		]);
+		return response()->json(['success', 'Data berhasil disimpan.']);
 	}
 
 	public function editRombel($id){
 		$rombel = Rombel::find($id);
-		return response()->json();
+		return response()->json($rombel);
 	}
 
 	public function destroyRombel($id){
 		Rombel::find($id)->delete();
-		return response()->json($rombel);
+		return response()->json();
 	}
 
-
-	// CRUD Jurusan
+//======================= CRUD Jurusan ===============================
 	
+	public function calonKaprog(){
+		$guru = Guru::orderBy('nama')->get();
+		$kaprog = Jurusan::select('kaprog_id')->get();
+		$calon = [];
+		foreach ($guru as $g) {
+			if ($g->kaprog == null) {
+				array_push($calon, $g);
+			}
+		}
+		return response()->json($calon);
+	}
+
+	public function editKaprog($id){
+		$jurusan = Jurusan::where('id', $id)->first();
+		$kaprog = Guru::where('id', $jurusan->kaprog_id)->first();
+		return response()->json($kaprog);
+	}
+
 	public function showJurusan(Request $request){
 		if ($request->ajax()) {
-			$rombel = DataJurusan::all();
-			return DataTables::of($rombel)
+			$jurusan = DataJurusan::all();
+			return DataTables::of($jurusan)
 			->addIndexColumn()
 				->addColumn('action', function ($row) {
 
@@ -229,7 +246,13 @@ class AdminController extends Controller
 	}
 
 	public function storeJurusan(Request $request){
-
+		Jurusan::updateOrCreate(['id' => $request->jurusan_id],
+		[
+			'nama' => $request->jurusan,
+			'kaprog_id' => $request->kaprog,
+			'kode' => $request->kode,
+		]);
+		return response()->json(['success', 'Data berhasil disimpan.']);
 	}
 
 	public function editJurusan($id){
@@ -242,12 +265,29 @@ class AdminController extends Controller
 		return response()->json();
 	}
 
-
-	// CRUD Rayon
+//======================= CRUD Rayon ===============================
 	
+	public function calonPembimbing(){
+		$guru = Guru::orderBy('nama')->get();
+		$pembimbing = Rayon::select('pembimbing_id')->get();
+		$calon = [];
+		foreach ($guru as $g) {
+			if ($g->rayon == null) {
+				array_push($calon, $g);
+			}
+		}
+		return response()->json($calon);
+	}
+
+	public function editPembimbing($id){
+		$rayon = Rayon::where('id', $id)->first();
+		$pembimbing = Guru::where('id', $rayon->pembimbing_id)->first();
+		return response()->json($pembimbing);
+	}
+
 	public function showRayon(Request $request){
 		if ($request->ajax()) {
-			$rombel = DataRombel::all();
+			$rombel = DataRayon::all();
 			return DataTables::of($rombel)
 			->addIndexColumn()
 				->addColumn('action', function ($row) {
@@ -265,7 +305,13 @@ class AdminController extends Controller
 	}
 
 	public function storeRayon(Request $request){
-
+		Rayon::updateOrCreate(['id' => $request->rayon_id],
+		[
+			'nama' => $request->rayon,
+			'ruangan' => $request->ruangan,
+			'pembimbing_id' => $request->pembimbing,
+		]);
+		return response()->json(['success', 'Data berhasil disimpan.']);
 	}
 
 	public function editRayon($id){
@@ -274,6 +320,7 @@ class AdminController extends Controller
 	}
 
 	public function destroyRayon($id){
-		
+		Rayon::find($id)->delete();
+		return response()->json();
 	}
 }

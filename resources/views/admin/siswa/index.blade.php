@@ -42,8 +42,8 @@
 					</p>
 				</div>
 			</div>
-			<div class="table-responsive-md mt-3" id="tag_container">
-				<table class="table table-sm hover data-table order-column">
+			<div class="table-responsive">
+				<table class="table table-sm hover data-table order-column dt-responsive display nowrap">
 					<thead>
 						<tr>
 							<th scope="col" class="text-center">No</th>
@@ -339,65 +339,67 @@
 	});
 
 	function nullChecker(){
-		var siswa_id = document.getElementById('siswa_id').siswa_id.value;
-		var nisn = document.getElementById('nisn').nisn.value;
-		var nis = document.getElementById('nis').nis.value;
-		var nama = document.getElementById('nama').nama.value;
-		var rayon = document.getElementById('rayon').rayon.value;
-		var rombel = document.getElementById('rombel').rombel.value;
-		var alamat = document.getElementById('alamat').alamat.value;
-		var jk = document.getElementById('jk').jk.value;
-		var telp = document.getElementById('telp').telp.value;
-		var agama = document.getElementById('agama').agama.value;
-		var tempat_lahir = document.getElementById('tempat_lahir').tempat_lahir.value;
-		var tanggal_lahir = document.getElementById('tanggal_lahir').tanggal_lahir.value;
-		var asal_sekolah = document.getElementById('asal_sekolah').asal_sekolah.value;
-		if (siswa_id = nisn = nis = nama = rayon = rombel = alamat = jk = telp = agama = tempat_lahir = tanggal_lahir = asal_sekolah = "") {
-			alert('Ada data yang kosong!');
-			return false;
-		}
+		
 	}
 
 	$('#saveBtn').click(function (e) {
 		e.preventDefault();
-		$(this).html('Sending..');
+		$(this).html('Menyimpan..');
 		var form = $('#formSiswa').serialize();
-		nullChecker();
-		$.ajax({
-		  data: $('#formSiswa').serialize(),
-		  url: "{{ route('admin.siswa.store') }}",
-		  type: "POST",
-		  dataType: 'json',
-		  success: function (data) {
-			  $('#formSiswa').trigger("reset");
-			  $('#ajaxModel').modal('hide');
-			  $('#saveBtn').html('Save Changes');
-			  table.draw();
-			  alert('Data berhasil disimpan');
-		  },
-		  error: function (data) {
-			  alert('Data yang anda masukkan sudah ada atau tidak lengkap');
-			  $('#saveBtn').html('Save Changes');
-		  }
-	  });
+		var siswa_id = $('siswa_id').val();
+		var nisn = $('nisn').val();
+		var nis = $('nis').val();
+		var nama = $('nama').val();
+		var rayon = $('rayon').val();
+		var rombel = $('rombel').val();
+		var alamat = $('alamat').val();
+		var jk = $('jk').val();
+		var telp = $('telp').val();
+		var agama = $('agama').val();
+		var tempat_lahir = $('tempat_lahir').val();
+		var tanggal_lahir = $('tanggal_lahir').val();
+		var asal_sekolah = $('asal_sekolah').val();
+		if (siswa_id === "" && nisn === "" && nis === "" && nama === "" && rayon === "" && rombel === "" && alamat === "" && jk === "" && telp === "" && agama === "" && tempat_lahir === "" && tanggal_lahir === "" && asal_sekolah  === "") {
+			alert('Ada data yang kosong!');
+			$('#saveBtn').html('Simpan');
+			return false;
+		}else{
+			$.ajax({
+			  data: $('#formSiswa').serialize(),
+			  url: "{{ route('admin.siswa.store') }}",
+			  type: "POST",
+			  dataType: 'json',
+			  success: function (data) {
+				  $('#formSiswa').trigger("reset");
+				  $('#ajaxModel').modal('hide');
+				  $('#saveBtn').html('Simpan');
+				  table.draw();
+			  },
+			  error: function (data) {
+				  alert('Ada data duplikat!');
+				  $('#saveBtn').html('Simpan');
+			  }
+		  })
+		}
 	});
 
 	$('body').on('click', '.deleteData', function () {
 
 		var siswa_id = $(this).data("id");
-		confirm("Are You sure want to delete !");
-
-		$.ajax({
-			type: "DELETE",
-			url: "{{ route('admin.siswa') }}" +'/' + siswa_id +'/hapus',
-			success: function (data) {
-				table.draw();
-				alert('Data berhasil dihapus.');
-			},
-			error: function (data) {
-				console.log('Error:', data);
-			}
-		});
+		var v = confirm("Klik OK untuk hapus permanen!");
+		if (v == true) {
+			$.ajax({
+				type: "DELETE",
+				url: "{{ route('admin.siswa') }}" +'/' + siswa_id +'/hapus',
+				success: function (data) {
+					table.draw();
+					alert('Data berhasil dihapus.');
+				},
+				error: function (data) {
+					console.log('Error:', data);
+				}
+			});
+		}
 	});
 
 	$('body').on('click', '.showData', function(){

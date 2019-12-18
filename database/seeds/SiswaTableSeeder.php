@@ -30,7 +30,7 @@ class SiswaTableSeeder extends Seeder
 			'Buddha',
 	   ];
 
-	  for ($i=0; $i < 5; $i++) { 
+	  for ($i=0; $i < 100; $i++) { 
 	  	$date = $dummy->dateTimeBetween($startDate = '-20 years', $endDate = '-15 years');
 		Siswa::create([
 			'nisn' => $dummy->unique()->randomNumber($nbDigits = 8),

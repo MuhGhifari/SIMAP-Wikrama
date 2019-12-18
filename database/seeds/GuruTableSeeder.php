@@ -14,7 +14,7 @@ class GuruTableSeeder extends Seeder
   {
     $dummy = Faker\Factory::create('id_ID');
     $jk = ['Laki-laki', 'Perempuan'];
-    for ($i=0; $i < 10; $i++) { 
+    for ($i=0; $i < 30; $i++) { 
       Guru::create([
     		'nik' => $dummy->nik,
     		'nama' => $dummy->name,

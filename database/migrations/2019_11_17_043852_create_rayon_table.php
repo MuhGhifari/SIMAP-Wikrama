@@ -17,7 +17,7 @@ class CreateRayonTable extends Migration
             $table->bigIncrements('id');
             $table->string('nama');
             $table->string('ruangan')->nullable();
-            $table->integer('pembimbing_id')->nullable();
+            $table->integer('pembimbing_id')->unique()->nullable();
             $table->timestamps();
         });
     }

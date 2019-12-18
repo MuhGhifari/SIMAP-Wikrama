@@ -49,7 +49,7 @@
 							<th scope="col" class="text-center">No</th>
 							<th scope="col">NIK</th> 
 							<th scope="col">Nama</th>
-							<th scope="col" class="text-center">Alamat</th>
+							<th scope="col">Alamat</th>
 							<th scope="col" class="text-center">Opsi</th>
 						</tr>
 					</thead>
@@ -187,6 +187,10 @@
 			"targets": 0,
 			"className": "text-center order-column",
 			"width": "1%"
+		},
+		{
+			"targets": 4,
+			"className": "text-center"
 		}
 		],
 		columns: [
@@ -224,43 +228,55 @@
 
 	$('#saveBtn').click(function (e) {
 		e.preventDefault();
-		$(this).html('Sending..');
+		$(this).html('Menyimpan..');
 		var form = $('#formGuru').serialize();
-		console.log(form);
-		$.ajax({
-		  data: $('#formGuru').serialize(),
-		  url: "{{ route('admin.guru.store') }}",
-		  type: "POST",
-		  dataType: 'json',
-		  success: function (data) {
-			  $('#formGuru').trigger("reset");
-			  $('#formModel').modal('hide');
-			  $('#saveBtn').html('Save Changes');
-			  table.draw();
-		  },
-		  error: function (data) {
-			  alert('Error:');
-			  $('#saveBtn').html('Save Changes');
-		  }
-	  });
+		var guru_id = $('guru_id').val();
+		var nik = $('nik').val();
+		var nama = $('nama').val();
+		var alamat = $('alamat').val();
+		var jk = $('jk').val();
+		var telp = $('telp').val();
+		if (guru_id === "" && nik === "" && nama === "" && alamat === "" && jk === "" && telp === "") {
+			alert('Ada data yang kosong!');
+			$('#saveBtn').html('Simpan');
+			return false;
+		}else{
+			$.ajax({
+			  data: $('#formGuru').serialize(),
+			  url: "{{ route('admin.guru.store') }}",
+			  type: "POST",
+			  dataType: 'json',
+			  success: function (data) {
+				  $('#formGuru').trigger("reset");
+				  $('#formModel').modal('hide');
+				  $('#saveBtn').html('Simpan');
+				  table.draw();
+			  },
+			  error: function (data) {
+				  alert('Error:', data);
+				  $('#saveBtn').html('Simpan');
+			  }
+		  });
+		}
 	});
 
 	$('body').on('click', '.deleteData', function () {
 
 		var data_id = $(this).data("id");
-		confirm("Klik OK untuk konfirmasi penghapusan");
-
-		$.ajax({
-			type: "DELETE",
-			url: "{{ route('admin.guru') }}" +'/' + data_id +'/hapus',
-			success: function (data) {
-				table.draw();
-				alert('Data berhasil dihapus.');
-			},
-			error: function (data) {
-				console.log('Error:', data);
-			}
-		});
+		var v = confirm("Klik OK untuk hapus permanen!");
+		if (v == true) {
+			$.ajax({
+				type: "DELETE",
+				url: "{{ route('admin.guru') }}" +'/' + data_id +'/hapus',
+				success: function (data) {
+					table.draw();
+					alert('Data berhasil dihapus.');
+				},
+				error: function (data) {
+					console.log('Error:', data);
+				}
+			});
+		}
 	});
 
 	$('body').on('click', '.showData', function(){
