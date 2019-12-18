@@ -49,7 +49,7 @@ class RayonTableSeeder extends Seeder
 
 		$dummy = Faker\Factory::create();
 
-		for ($i = 0; $i < count($nama); $i++) {
+		for ($i = 0; $i < 32; $i++) {
 			Rayon::create([
 				'nama' => $nama[$i],
 				'pembimbing_id' => $dummy->unique()->numberBetween(1, 50),

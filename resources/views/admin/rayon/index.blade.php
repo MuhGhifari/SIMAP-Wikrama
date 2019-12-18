@@ -90,6 +90,7 @@
 		</div>
 	</div>
 </div>
+<ul>	
 @endsection
 
 @section('scripts')
@@ -110,7 +111,7 @@
 				select.append(op);
 			},
 			error: function (data) {
-			  console.log(data.response);
+			  alert('Error : ' + data.responseText);
 			  $('#saveBtn').html('Simpan');
 		  }
 		});
@@ -139,7 +140,6 @@
 	// number keys
 	
 	jQuery(document).ready( function($) {
- 
 	// Disable scroll when focused on a number input.
 	$('form').on('focus', 'input[type=number]', function(e) {
 		$(this).on('wheel', function(e) {
@@ -157,7 +157,6 @@
 		if ( e.which == 38 || e.which == 40 )
 			e.preventDefault();
 	});  
-	  
 	fillGuru();
 });
 	// Datatable
@@ -190,7 +189,7 @@
 			{data: 'DT_RowIndex', name: 'DT_RowIndex'},
 			{data: 'rayon', name: 'rayon'},
 			{data: 'pembimbing', name: 'pembimbing'},
-			{data: 'jumlah_siswa', name: 'jumlah_siswa'},
+			{data: 'siswa_count', name: 'siswa_count'},
 			{data: 'ruangan', name: 'ruangan'},
 			{data: 'action', name: 'action', orderable: false, searchable: false},
 		]
@@ -225,13 +224,13 @@
 		e.preventDefault();
 		$(this).html('Menyimpan..');
 		var form = $('#formRayon').serialize();
-		var rayon_id = $('rayon_id').val();
-		var rayon = $('rayon').val();
-		var ruangan = $('ruangan').val();
-		var pembimbing = $('pembimbing').val();
-		if (rayon_id === "" && rayon === "" && ruangan === "" && pembimbing === "") {
+		var rayon_id = $('#rayon_id').val();
+		var rayon = $('#rayon').val();
+		var ruangan = $('#ruangan').val();
+		var pembimbing = $('#pembimbing').val();
+		if (rayon.length == 0 && ruangan.length == 0 && pembimbing.length == 0) {
 			alert('Ada data yang kosong!');
-			$('saveBtn').html('Simpan');
+			$('#saveBtn').html('Simpan');
 		}else{
 			$.ajax({
 			  data: $('#formRayon').serialize(),

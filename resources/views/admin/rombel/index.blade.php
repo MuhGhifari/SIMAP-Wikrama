@@ -169,7 +169,7 @@
 			{data: 'DT_RowIndex', name: 'DT_RowIndex'},
 			{data: 'rombel', name: 'rombel'},
 			{data: 'jurusan', name: 'jurusan'},
-			{data: 'jumlah_siswa', name: 'jumlah_siswa'},
+			{data: 'siswa_count', name: 'siswa_count'},
 			{data: 'tahun_ajaran', name: 'tahun_ajaran'},
 			{data: 'action', name: 'action', orderable: false, searchable: false},
 		]
@@ -201,15 +201,16 @@
 		e.preventDefault();
 		$(this).html('Menyimpan..');
 		var form = $('#formRombel').serialize();
-		var rombel_id = $('rombel_id').val();
-		var rombel = $('rombel').val();
-		var tingkatan = $('tingkatan').val();
-		var jurusan = $('jurusan').val();
-		var tahun_ajaran = $('tahun_ajaran').val();
-		if (rombel_id === "" &&  rombel === "" && tingkatan === "" && jurusan === "" && tahun_ajaran === "") {
+		var rombel_id = $('#rombel_id').val();
+		var rombel = $('#rombel').val();
+		var tingkatan = $('#tingkatan').val();
+		var jurusan = $('#jurusan').val();
+		var tahun_ajaran = $('#tahun_ajaran').val();
+		if (rombel.length == 0 || tingkatan.length == 0 || jurusan.length == 0 || tahun_ajaran.length == 0) {
 			alert('Ada data yang kosong!');
-			$('saveBtn').html('Simpan');
-		}else{
+		  $('#saveBtn').html('Simpan');	
+		}
+		else{
 			$.ajax({
 			  data: $('#formRombel').serialize(),
 			  url: "{{ route('admin.rombel.store') }}",

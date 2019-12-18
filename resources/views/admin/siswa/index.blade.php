@@ -346,23 +346,22 @@
 		e.preventDefault();
 		$(this).html('Menyimpan..');
 		var form = $('#formSiswa').serialize();
-		var siswa_id = $('siswa_id').val();
-		var nisn = $('nisn').val();
-		var nis = $('nis').val();
-		var nama = $('nama').val();
-		var rayon = $('rayon').val();
-		var rombel = $('rombel').val();
-		var alamat = $('alamat').val();
-		var jk = $('jk').val();
-		var telp = $('telp').val();
-		var agama = $('agama').val();
-		var tempat_lahir = $('tempat_lahir').val();
-		var tanggal_lahir = $('tanggal_lahir').val();
-		var asal_sekolah = $('asal_sekolah').val();
-		if (siswa_id === "" && nisn === "" && nis === "" && nama === "" && rayon === "" && rombel === "" && alamat === "" && jk === "" && telp === "" && agama === "" && tempat_lahir === "" && tanggal_lahir === "" && asal_sekolah  === "") {
+		var siswa_id = $('#siswa_id').val();
+		var nisn = $('#nisn').val();
+		var nis = $('#nis').val();
+		var nama = $('#nama').val();
+		var rayon = $('#rayon').val();
+		var rombel = $('#rombel').val();
+		var alamat = $('#alamat').val();
+		var jk = $('#jk').val();
+		var telp = $('#telp').val();
+		var agama = $('#agama').val();
+		var tempat_lahir = $('#tempat_lahir').val();
+		var tanggal_lahir = $('#tanggal_lahir').val();
+		var asal_sekolah = $('#asal_sekolah').val();
+		if (nisn.length == 0  || nis.length == 0  || nama.length == 0  || rayon.length == 0  || rombel.length == 0  || alamat.length == 0  || jk.length == 0  || telp.length == 0  || agama.length == 0  || tempat_lahir.length == 0  || tanggal_lahir.length == 0  || asal_sekolah.length == 0 ) {
 			alert('Ada data yang kosong!');
 			$('#saveBtn').html('Simpan');
-			return false;
 		}else{
 			$.ajax({
 			  data: $('#formSiswa').serialize(),
@@ -376,7 +375,7 @@
 				  table.draw();
 			  },
 			  error: function (data) {
-				  alert('Ada data duplikat!');
+				  alert("Error: " + data.responseText);
 				  $('#saveBtn').html('Simpan');
 			  }
 		  })
@@ -397,6 +396,7 @@
 				},
 				error: function (data) {
 					console.log('Error:', data);
+					alert('Data gagal dihapus');
 				}
 			});
 		}

@@ -223,11 +223,11 @@
 		e.preventDefault();
 		$(this).html('Menyimpan..');
 		var form = $('#formJurusan').serialize();
-		var jurusan_id = $('jurusan_id').val();
-		var jurusan = $('jurusan').val();
-		var kode = $('kode').val();
-		var kaprog = $('kaprog').val();
-		if (jurusan_id === "" && jurusan === "" && kode === "" && kaprog === "") {
+		var jurusan_id = $('#jurusan_id').val();
+		var jurusan = $('#jurusan').val();
+		var kode = $('#kode').val();
+		var kaprog = $('#kaprog').val();
+		if (jurusan.length == 0 || kode.length == 0 || kaprog.length == 0) {
 			alert('Ada data yang kosong!');
 			$('saveBtn').html('Simpan');
 		}else{
@@ -244,7 +244,7 @@
 				  table.draw();
 			  },
 			  error: function (data) {
-				  alert('Error:');
+				  alert('Error:' + data.responseText);
 				  $('#saveBtn').html('Simpan');
 			  }
 		  });

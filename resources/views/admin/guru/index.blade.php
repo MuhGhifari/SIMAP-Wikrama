@@ -230,13 +230,13 @@
 		e.preventDefault();
 		$(this).html('Menyimpan..');
 		var form = $('#formGuru').serialize();
-		var guru_id = $('guru_id').val();
-		var nik = $('nik').val();
-		var nama = $('nama').val();
-		var alamat = $('alamat').val();
-		var jk = $('jk').val();
-		var telp = $('telp').val();
-		if (guru_id === "" && nik === "" && nama === "" && alamat === "" && jk === "" && telp === "") {
+		var guru_id = $('#guru_id').val();
+		var nik = $('#nik').val();
+		var nama = $('#nama').val();
+		var alamat = $('#alamat').val();
+		var jk = $('#jk').val();
+		var telp = $('#telp').val();
+		if (nik.length == 0 || nama.length == 0 || alamat.length == 0 || jk.length == 0 || telp.length == 0) {
 			alert('Ada data yang kosong!');
 			$('#saveBtn').html('Simpan');
 			return false;
@@ -253,7 +253,7 @@
 				  table.draw();
 			  },
 			  error: function (data) {
-				  alert('Error:', data);
+				  alert('Error :' + data.responseText);
 				  $('#saveBtn').html('Simpan');
 			  }
 		  });

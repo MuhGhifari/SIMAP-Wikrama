@@ -168,7 +168,7 @@ class AdminController extends Controller
 	public function showRombel(Request $request){
 		$jurusan = Jurusan::all();
 		if ($request->ajax()) {
-			$rombel = DataRombel::all();
+			$rombel = DataRombel::withCount('siswa')->get();
 			return DataTables::of($rombel)
 			->addIndexColumn()
 				->addColumn('action', function ($row) {
@@ -286,9 +286,10 @@ class AdminController extends Controller
 	}
 
 	public function showRayon(Request $request){
+		$siswa = Siswa::all();
+		$rayon = DataRayon::withCount('siswa')->get();
 		if ($request->ajax()) {
-			$rombel = DataRayon::all();
-			return DataTables::of($rombel)
+			return DataTables::of($rayon)
 			->addIndexColumn()
 				->addColumn('action', function ($row) {
 
@@ -301,7 +302,8 @@ class AdminController extends Controller
 				->rawColumns(['action'])
 				->make(true);
 		}
-		return view('admin.rayon.index');
+		$riri = Rayon::withCount('siswa')->get();
+		return view('admin.rayon.index', compact('riri'));
 	}
 
 	public function storeRayon(Request $request){
