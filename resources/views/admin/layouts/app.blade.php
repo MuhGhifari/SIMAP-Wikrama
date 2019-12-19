@@ -22,7 +22,7 @@
         	<i class="fas fa-fw fa-home mr-3"></i> Beranda
         </a>
         <a href="{{ route('admin.siswa') }}" 
-          class="borderless list-group-item {{ Request::routeIs('admin.siswa') ? 'active' : '' }}">
+          class="borderless list-group-item {{ Request::routeIs('admin.siswa') ? 'active' : '' || Request::routeIs('admin.siswa.import') ? 'active' : '' }}">
           <i class="fas fa-fw fa-user-graduate mr-3"></i> Data Siswa
         </a>
         <a href="{{ route('admin.rapot') }}" 
