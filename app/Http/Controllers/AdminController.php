@@ -104,9 +104,6 @@ class AdminController extends Controller
 		return response()->json($siswa);
 	}
 
-	public function showImport(){
-		return view('admin.siswa.import');
-	}
 
 //====================== Rapot Siswa =================================
 
