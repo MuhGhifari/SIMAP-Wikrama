@@ -37,7 +37,7 @@
 				</div>
 				<div class="col-md-6 p-0">
 					<p class="text-md-right">
-						<a id="importSiswa" class="btn btn-success btn-sm" href="{{ route('admin.siswa.import') }}" style="color: white;"><i class="fa fa-upload"></i> Upload Excel</a>
+						<a id="importSiswa" class="btn btn-success btn-sm" style="color: white;"><i class="fa fa-upload"></i> Upload Excel</a>
 						<a id="siswaBaru" class="btn btn-primary btn-sm" style="color: white;"><i class="fa fa-plus"></i> Tambah siswa</a>
 					</p>
 				</div>
@@ -318,7 +318,7 @@
 
 	$('body').on('click', '.editData', function () {
 		var data_id = $(this).data('id');
-		$.get("{{ route('admin.siswa') }}" + '/' + data_id +'/edit', function (data) {
+		$.get("{{ route('admin.siswa') }}" +'/' + data_id +'/edit', function (data) {
 			$('#modelHeading').html("Edit Data Siswa");
 			$('#saveBtn').val("edit-siswa");
 			$('#ajaxModel').modal('show');

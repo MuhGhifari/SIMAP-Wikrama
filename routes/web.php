@@ -40,7 +40,6 @@ Route::prefix('/admin')->name('admin.')->middleware('admin')->group(function(){
 		Route::get('/data-siswa/{id}/edit', 'AdminController@editSiswa')->name('siswa.edit');
 		Route::delete('/data-siswa/{id}/hapus', 'AdminController@destroySiswa')->name('siswa.delete');
 		Route::get('/data-siswa/{id}/show', 'AdminController@showDataSiswa')->name('siswa.show');
-		Route::get('/data-siswa/import', 'AdminController@showImport')->name('siswa.import');
 
 	// Halaman Rapot
 	Route::get('/rapot-siswa', 'AdminController@showRapot')->name('rapot');
