@@ -15,8 +15,8 @@ class CreateRayonTable extends Migration
     {
         Schema::create('rayon', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('nama');
-            $table->string('ruangan')->nullable();
+            $table->string('nama')->unique();
+            $table->string('ruangan')->unique()->nullable();
             $table->integer('pembimbing_id')->unique()->nullable();
             $table->timestamps();
         });

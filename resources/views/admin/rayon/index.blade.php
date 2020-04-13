@@ -42,7 +42,7 @@
 				</div>
 			</div>
 			<div class="table-responsive-md mt-3">
-				<table class="table hover order-column data-table-rayon">
+				<table class="table hover order-column data-table-rayon" style="width: 100%">
 					<thead>
 						<tr>
 							<th scope="col" class="text-center">No</th>
@@ -272,4 +272,5 @@
 		}
 	});
  });
+</script>
 @endsection

@@ -17,5 +17,15 @@ class Guru extends Model
     	return $this->hasOne('App\Rayon', 'pembimbing_id');
     }
 
-    
+    public function kelasAjar(){
+        return $this->hasMany('App\KelasAjar', 'guru_id');
+    }
+
+    public function mapel(){
+        return $this->belongsTo('App\Mapel', 'mapel_id');
+    }
+
+    public function user(){
+        return $this->belongsTo('App\User', 'user_id');
+    }
 }

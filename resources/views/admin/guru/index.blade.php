@@ -37,17 +37,16 @@
 				</div>
 				<div class="col-md-6 p-0">
 					<p class="text-md-right">
-						<a id="importSiswa" class="btn btn-success btn-sm" style="color: white;"><i class="fa fa-upload"></i> Upload Excel</a>
-						<a id="guruBaru" class="btn btn-primary btn-sm" style="color: white;"><i class="fa fa-plus"></i> Tambah Guru</a>
+						<a id="guruBaru" class="btn btn-success btn-sm" style="color: white;"><i class="fa fa-plus"></i> Tambah Guru</a>
 					</p>
 				</div>
 			</div>
 			<div class="table-responsive-md mt-3" id="tag_container">
-				<table class="table table-sm hover data-table order-column">
+				<table class="table table-sm hover data-table order-column" style="width: 100%">
 					<thead>
 						<tr>
 							<th scope="col" class="text-center">No</th>
-							<th scope="col">NIK</th> 
+							<th scope="col">NIK</th>
 							<th scope="col">Nama</th>
 							<th scope="col">Alamat</th>
 							<th scope="col" class="text-center">Opsi</th>
@@ -80,7 +79,7 @@
 					<div class="row form-group">
 						<label for="jk">Jenis Kelamin</label>
 						<select name="jk" id="jk" class="form-control">
-							<option value="">-- Pilih --</option>
+							<option value="" style="display: none">-- Pilih --</option>
 							<option value="Laki-laki">Laki-laki</option>
 							<option value="Perempuan">Perempuan</option>
 						</select>
@@ -92,6 +91,11 @@
 					<div class="row form-group">
 						<label for="alamat">Alamat</label>
 						<textarea id="alamat" name="alamat" class="form-control" required></textarea>
+					</div>
+					<div class="row form-group">
+						<label for="mapel">Mata Pelajaran</label>
+						<select name="mapel" id="mapel" class="form-control">
+						</select>
 					</div>
 					<div class="row form-group mt-3">
 						<button type="submit" class="form-control btn btn-primary" id="saveBtn" value="create">Simpan</button>
@@ -133,6 +137,11 @@
 						<td width="10%">:</td>
 						<td id="bio_alamat"></td>
 					</tr>
+					<tr>
+						<td width="40%">Mata Pelajaran</td>
+						<td width="10%">:</td>
+						<td id="bio_mapel"></td>
+					</tr>
 				</table>
 				<button class="btn btn-primary col-12" id="hideBio">Kembali</button>
 			</div>
@@ -144,6 +153,49 @@
 @section('scripts')
 
 <script type="text/javascript">
+
+	function fillMapel(){
+		var select = $('#mapel');
+		var op = "";
+		$.ajax({
+			type: 'get',
+			url : "{{ route('admin.guru.show.mapel') }}",
+			success:function(data){
+				op+='<option value = "" disabled selected style = "display:none;">Pilih mapel</option>';
+				for (var i = 0; i < data.length; i++) {
+					op+='<option value = "' + data[i].id + '">' + data[i].nama + '</option>';
+				}
+				select.html("");
+				select.append(op);
+			},
+			error: function (data) {
+			  alert('Error : ' + data.responseText);
+			  $('#saveBtn').html('Simpan');
+		  }
+		});
+	}
+
+	function fillMapelDiAjar(id){
+		var select = $('#mapel');
+		var op = "";
+		fillMapel();
+		$.ajax({
+			type: 'get',
+			url : "{{ route('admin.guru') }}" + "/" + id +"/mapel/edit",
+			success:function(data){
+				// $('#mapel > option').each(function(){
+				// 	if (this.val() == data.id) {
+					console.log(data.id);
+				$('#mapel').val(data.id);
+				// 	}
+				// });
+			},
+			error: function (data) {
+			  alert('Error : ' + data.responseText);
+			  $('#saveBtn').html('Simpan');
+		  }
+		});
+	}
 	// number keys
 	
 	jQuery(document).ready( function($) {
@@ -189,13 +241,21 @@
 			"width": "1%"
 		},
 		{
+			"targets": 2,
+			"width": "30%"
+		},
+		{
+			"targets": 3,
+			"width": "30%"
+		},
+		{
 			"targets": 4,
 			"className": "text-center"
 		}
 		],
 		columns: [
 			{data: 'DT_RowIndex', name: 'DT_RowIndex'},
-			{data: 'nik', nama: 'nik'},
+			{data: 'nik', name: 'nik'},
 			{data: 'nama', name: 'nama'},
 			{data: 'alamat', name: 'alamat'},
 			{data: 'action', name: 'action', orderable: false, searchable: false},
@@ -203,6 +263,7 @@
 	});
 
 	$('#guruBaru').click(function () {
+		fillMapel();
 		$('#saveBtn').val("create-guru");
 		$('#guru_id').val('');
 		$('#formGuru').trigger("reset");
@@ -214,6 +275,7 @@
 	$('body').on('click', '.editData', function () {
 		var data_id = $(this).data('id');
 		$.get("{{ route('admin.guru') }}" +'/' + data_id +'/edit', function (data) {
+			fillMapelDiAjar(data_id);
 			$('#formHeading').html("Edit Data Guru");
 			$('#saveBtn').val("edit-guru");
 			$('#formModel').modal('show');
@@ -236,7 +298,9 @@
 		var alamat = $('#alamat').val();
 		var jk = $('#jk').val();
 		var telp = $('#telp').val();
-		if (nik.length == 0 || nama.length == 0 || alamat.length == 0 || jk.length == 0 || telp.length == 0) {
+		var mapel = $('#mapel').val();
+		console.log(mapel);
+		if (nik.length == 0 || nama.length == 0 || alamat.length == 0 || jk.length == 0 || telp.length == 0 || mapel.length == 0) {
 			alert('Ada data yang kosong!');
 			$('#saveBtn').html('Simpan');
 			return false;
@@ -289,6 +353,7 @@
 			$('#bio_alamat').html(data.alamat);
 			$('#bio_jk').html(data.jk);
 			$('#bio_telp').html(data.telp);
+			$('#bio_mapel').html(data.mapel);
 		})
 	});
 

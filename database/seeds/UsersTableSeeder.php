@@ -12,12 +12,12 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-        $name = ['Muhammad Ghifari', 'Sanjaya', 'Salman Faris'];
-        $username = ['MuhGhifari', 'Sanjay', 'KingSalman'];
-        $email = ['muhammadghifari37@gmail.com', 'restu@gmail.com', 'asdfasdf@asdf.com'];
-        $password = [bcrypt('asdfasdf'), bcrypt('jkl;jkl;'), bcrypt('asdfjkl;')];
-        $avatar = ['user.png', 'guru.jpg', 'superadmin.jpg'];
-        $role = ['admin', 'guru', 'superadmin'];
+        $name = ['Muhammad Ghifari', 'Salman Faris'];
+        $username = ['MuhGhifari', 'KingSalman'];
+        $email = ['muhammadghifari37@gmail.com', 'asdfasdf@asdf.com'];
+        $password = [bcrypt('asdfasdf'), bcrypt('asdfjkl;')];
+        $avatar = ['user.png', 'user.png'];
+        $role = ['admin', 'superadmin'];
         for ($i=0; $i < count($name); $i++) { 
         	User::create([
         	'name' => $name[$i],

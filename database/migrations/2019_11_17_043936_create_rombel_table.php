@@ -14,7 +14,7 @@ class CreateRombelTable extends Migration
     public function up()
     {
         Schema::create('rombel', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->increments('id');
             $table->integer('jurusan_id');
             $table->string('nama');
             $table->enum('tingkatan', ['10', '11', '12']);

@@ -3,6 +3,15 @@
 		<meta charset="utf-8">
 		<meta content="width=device-width, initial-scale=1" name="viewport">
 		@include('partials.stylesheets')
+		<style type="text/css">
+			#login, #password{
+			  font-size: 20px;
+			  margin: auto;  
+			  height: 50px;
+			  border-radius: 30px;
+			  max-width: 60%;
+			}
+		</style>
 	</head>
 	<body>
 		<div class="row m-0" id="main">

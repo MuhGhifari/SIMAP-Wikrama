@@ -1,7 +1,7 @@
 @extends('admin.layouts.app')
  
 @section('title')
-	Siswa
+	Data-siswa
 @endsection
 
 @section('stylesheets')
@@ -37,13 +37,12 @@
 				</div>
 				<div class="col-md-6 p-0">
 					<p class="text-md-right">
-						<a id="importSiswa" class="btn btn-success btn-sm" style="color: white;"><i class="fa fa-upload"></i> Upload Excel</a>
-						<a id="siswaBaru" class="btn btn-primary btn-sm" style="color: white;"><i class="fa fa-plus"></i> Tambah siswa</a>
+						<a id="siswaBaru" class="btn btn-success btn-sm" style="color: white;"><i class="fa fa-plus"></i> Tambah siswa</a>
 					</p>
 				</div>
 			</div>
 			<div class="table-responsive">
-				<table class="table table-sm hover data-table order-column dt-responsive display nowrap">
+				<table class="table table-sm hover data-table order-column dt-responsive display nowrap" style="width: 100%;">
 					<thead>
 						<tr>
 							<th scope="col" class="text-center">No</th>
