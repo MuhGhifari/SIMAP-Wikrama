@@ -17,5 +17,7 @@ class DatabaseSeeder extends Seeder
         $this->call(RayonTableSeeder::class);
         $this->call(JurusanTableSeeder::class);
         $this->call(GuruTableSeeder::class);
+        $this->call(MapelTableSeeder::class);
+        // $this->call(NilaiSeeder::class);
     }
 }

@@ -42,7 +42,7 @@
 				</div>
 			</div>
 			<div class="table-responsive-md mt-3">
-				<table class="table hover data-table-rombel order-column">
+				<table class="table hover data-table-rombel order-column" style="width: 100%">
 					<thead>
 						<tr>
 							<th scope="col" class="text-center">No</th>
@@ -76,6 +76,7 @@
 					<div class="row form-group">
 						<label for="tingkatan">Tingkatan</label>
 						<select name="tingkatan" id="tingkatan" class="form-control">
+							<option value="" style="display: none">-- Pilih --</option>
 							<option value="10">10</option>
 							<option value="11">11</option>
 							<option value="12">12</option>
@@ -84,7 +85,7 @@
 					<div class="row form-group">
 						<label for="jurusan">Jurusan</label>
 						<select name="jurusan" id="jurusan" class="form-control">
-							<option value="">-- Pilih --</option>
+							<option value="" style="display: none">-- Pilih --</option>
 							@foreach($jurusan as $j)
 							<option value="{{ $j->id }}">{{ $j->kode }}</option>
 							@endforeach
@@ -196,6 +197,11 @@
 			$('#tahun_ajaran').val(data.tahun_ajaran);
 		})
 	 });
+
+	$('body').on('click', '.aturMapel', function () {
+		var data_id = $(this).data('id');
+		window.location = "{{ route('admin.rombel') }}" + "/" + data_id + "/kelas-ajar";
+	});
 
 	$('#saveBtn').click(function (e) {
 		e.preventDefault();
